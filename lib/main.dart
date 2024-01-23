@@ -12,6 +12,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late int index;
+
+  @override
+  void initState() {
+    super.initState();
+    index = 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,8 +27,32 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text("navigation"),
         ),
-        body: const Placeholder(),
+        body: homeBody(),
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: "search"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "person"),
+          ],
+          currentIndex: index,
+          onTap: (newIndex) => setState(() {
+            index = newIndex;
+          }),
+        ),
       ),
     );
+  }
+
+  Widget homeBody() {
+    switch (index) {
+      case 0:
+        return Center(child: Icon(Icons.home, size: 100,));
+      case 1:
+        return Center(child: Icon(Icons.search, size: 100,));
+      case 2:
+        return Center(child: Icon(Icons.person, size: 100,));
+      default:
+        return Center(child: Icon(Icons.home, size: 100,));
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class NewPage extends StatelessWidget {
   const NewPage({super.key});
@@ -14,14 +15,13 @@ class NewPage extends StatelessWidget {
           TextButton(
             child: const Text("Back"),
             onPressed: () {
-              Navigator.pop(context);
+              context.pop();
             },
           ),
           TextButton(
             child: const Text("page2"),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const NewPage2()));
+              context.pushNamed("new2");
             },
           )
         ]),
@@ -44,13 +44,13 @@ class NewPage2 extends StatelessWidget {
           TextButton(
             child: const Text("Back"),
             onPressed: () {
-              Navigator.pop(context);
+              context.pop();
             },
           ),
           TextButton(
             child: const Text("home"),
             onPressed: () {
-              Navigator.popUntil(context, (route) => route.isFirst);
+              context.goNamed("home");
             },
           ),
         ]),

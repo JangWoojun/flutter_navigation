@@ -1,8 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_navigation/new_page.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
-  runApp(const MaterialApp(home: MyApp()));
+  runApp(
+    MaterialApp.router(
+      routerConfig: GoRouter(
+        initialLocation: '/',
+        routes: [
+          GoRoute(
+              path: '/', name: "home", builder: (context, _) => const MyApp()),
+          GoRoute(
+              path: '/new',
+              name: "new1",
+              builder: (context, _) => const NewPage()),
+          GoRoute(
+              path: '/new2',
+              name: "new2",
+              builder: (context, _) => const NewPage2()),
+        ],
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -13,7 +32,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +41,7 @@ class _MyAppState extends State<MyApp> {
       body: Center(
         child: TextButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const NewPage()));
+            context.pushNamed("new2");
           },
           child: const Text("Page"),
         ),

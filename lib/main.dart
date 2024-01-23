@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_navigation/new_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -12,47 +13,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late int index;
-
-  @override
-  void initState() {
-    super.initState();
-    index = 0;
-  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("navigation"),
-        ),
-        body: homeBody(),
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: "search"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "person"),
-          ],
-          currentIndex: index,
-          onTap: (newIndex) => setState(() {
-            index = newIndex;
-          }),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("navigation"),
+      ),
+      body: Center(
+        child: TextButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const NewPage()));
+          },
+          child: const Text("Page"),
         ),
       ),
     );
-  }
-
-  Widget homeBody() {
-    switch (index) {
-      case 0:
-        return Center(child: Icon(Icons.home, size: 100,));
-      case 1:
-        return Center(child: Icon(Icons.search, size: 100,));
-      case 2:
-        return Center(child: Icon(Icons.person, size: 100,));
-      default:
-        return Center(child: Icon(Icons.home, size: 100,));
-    }
   }
 }
